@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1 OF 1 — Ręcznie Malowane Dżinsy</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --off-black: #141414;
+  --dark: #1a1a1a;
+  --grey-dark: #2a2a2a;
+  --grey: #666;
+  --grey-light: #999;
+  --white: #f0ece4;
+  --cream: #e8e0d4;
+  --accent: #c42b2b;
+  --accent-glow: rgba(196, 43, 43, 0.3);
+  --green: #4a7c59;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ═══════ HERO ═══════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 80px 24px 60px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 30%, rgba(196,43,43,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.badge {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 8px 20px;
+  margin-bottom: 40px;
+  position: relative;
+  animation: fadeInDown 0.8s ease both;
+}
+
+.badge::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(196,43,43,0.2);
+}
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 12vw, 96px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  margin-bottom: 32px;
+  animation: fadeInUp 1s ease 0.2s both;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--grey-light);
+  max-width: 440px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  animation: fadeInUp 1s ease 0.4s both;
+}
+
+.hero-sub strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.cta-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 18px 40px;
+  transition: all 0.3s ease;
+  animation: fadeInUp 1s ease 0.6s both;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-main::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.cta-main:hover::before { left: 100%; }
+.cta-main:hover { box-shadow: 0 0 40px var(--accent-glow); transform: translateY(-2px); }
+
+.cta-arrow { font-size: 18px; transition: transform 0.3s ease; }
+.cta-main:hover .cta-arrow { transform: translateX(4px); }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey);
+  animation: pulse 2s ease infinite;
+}
+
+/* ═══════ TRUST BAR ═══════ */
+.trust-bar {
+  border-top: 1px solid var(--grey-dark);
+  border-bottom: 1px solid var(--grey-dark);
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.trust-scroll {
+  display: flex;
+  gap: 48px;
+  animation: scroll-left 20s linear infinite;
+  width: max-content;
+}
+
+.trust-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trust-item span { color: var(--accent); }
+
+/* ═══════ PROBLEM SECTION ═══════ */
+.section { padding: 100px 0; }
+
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 40px;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  margin-top: 48px;
+}
+
+.problem-card {
+  background: var(--off-black);
+  padding: 32px;
+  border-left: 3px solid var(--accent);
+  transition: all 0.3s ease;
+}
+
+.problem-card:hover { background: var(--dark); transform: translateX(4px); }
+
+.problem-card .emoji { font-size: 24px; margin-bottom: 12px; display: block; }
+
+.problem-card h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.problem-card p {
+  font-size: 14px;
+  color: var(--grey-light);
+  line-height: 1.6;
+}
+
+/* ═══════ SOLUTION / PROCESS ═══════ */
+.process-steps {
+  counter-reset: step;
+  margin-top: 48px;
+}
+
+.step {
+  counter-increment: step;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--grey-dark);
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.step-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 48px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.step-num::before { content: counter(step, decimal-leading-zero); }
+
+.step h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.step p {
+  font-size: 15px;
+  color: var(--grey-light);
+  line-height: 1.7;
+}
+
+/* ═══════ GUARANTEE STRIP ═══════ */
+.guarantee-strip {
+  background: var(--dark);
+  border: 1px solid var(--grey-dark);
+  padding: 40px 32px;
+  margin: 80px 0;
+  text-align: center;
+}
+
+.guarantee-strip h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+
+.guarantee-strip p {
+  font-size: 15px;
+  color: var(--grey-light);
+  line-height: 1.7;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ═══════ FAQ ═══════ */
+.faq-item {
+  border-bottom: 1px solid var(--grey-dark);
+  padding: 28px 0;
+}
+
+.faq-q {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--white);
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.faq-q:hover { color: var(--accent); }
+
+.faq-toggle {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding-top: 16px;
+}
+
+.faq-a p {
+  font-size: 14px;
+  color: var(--grey-light);
+  line-height: 1.7;
+}
+
+/* ═══════ FINAL CTA ═══════ */
+.final-cta {
+  text-align: center;
+  padding: 120px 24px;
+  position: relative;
+}
+
+.final-cta::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 80%, rgba(196,43,43,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.final-cta .section-title { margin-bottom: 20px; }
+
+.final-cta p {
+  font-size: 16px;
+  color: var(--grey-light);
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* ═══════ FOOTER ═══════ */
+footer {
+  border-top: 1px solid var(--grey-dark);
+  padding: 40px 0;
+  text-align: center;
+}
+
+footer p {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+footer a { color: var(--grey-light); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+
+/* ═══════ ANIMATIONS ═══════ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════ MOBILE ═══════ */
+@media (max-width: 600px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 60px 20px 40px; }
+  .step { grid-template-columns: 40px 1fr; gap: 16px; }
+  .step-num { font-size: 36px; }
+  .section { padding: 72px 0; }
+  .cta-main { padding: 16px 32px; font-size: 12px; }
+  .guarantee-strip { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="badge">Upcykling × Sztuka</div>
+  <h1>Jedyne<br>takie<br>na <em>świecie</em></h1>
+  <p class="hero-sub">
+    Ręcznie malowane dżinsy na <strong>ciężkim vintage'owym deniemie</strong>. Każda para powstaje w jednym egzemplarzu. Nigdy nie powtarzam projektu.
+  </p>
+  <a href="#vinted" class="cta-main">
+    Zobacz aktualne dropy <span class="cta-arrow">→</span>
+  </a>
+  <div class="scroll-hint">↓ Przewiń</div>
+</section>
+
+<!-- ═══════ TRUST BAR ═══════ -->
+<div class="trust-bar">
+  <div class="trust-scroll">
+    <div class="trust-item"><span>✦</span> 100% bawełna</div>
+    <div class="trust-item"><span>✦</span> Farba utrwalona termicznie</div>
+    <div class="trust-item"><span>✦</span> Wymiary co do centymetra</div>
+    <div class="trust-item"><span>✦</span> Wysyłka w 24h</div>
+    <div class="trust-item"><span>✦</span> 1 of 1 — zero kopii</div>
+    <div class="trust-item"><span>✦</span> Bezpieczna płatność przez Vinted</div>
+    <div class="trust-item"><span>✦</span> 100% bawełna</div>
+    <div class="trust-item"><span>✦</span> Farba utrwalona termicznie</div>
+    <div class="trust-item"><span>✦</span> Wymiary co do centymetra</div>
+    <div class="trust-item"><span>✦</span> Wysyłka w 24h</div>
+    <div class="trust-item"><span>✦</span> 1 of 1 — zero kopii</div>
+    <div class="trust-item"><span>✦</span> Bezpieczna płatność przez Vinted</div>
+  </div>
+</div>
+
+<!-- ═══════ PROBLEM ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Problem</div>
+      <h2 class="section-title">Masz dość spodni,<br>które nosi każdy<br>w Twojej szkole?</h2>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="emoji">🗑️</span>
+        <h3>Azjatycki fast fashion</h3>
+        <p>Poliester, który rozpadnie się po miesiącu. Wymiary to loteria. "Anime jeans" z Shein za 80 PLN wyglądają jak naklejka z targ&oacute;wki.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="emoji">💸</span>
+        <h3>Premium rzemiosło z Etsy</h3>
+        <p>Piękne, ale 400-1000 PLN za parę? Przy kieszonkowym to science fiction. Plus tygodnie czekania na przesyłkę z USA.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="emoji">😐</span>
+        <h3>Sieciówkowa "unikalność"</h3>
+        <p>Te same wzory w każdym centrum handlowym. Zero charakteru. Nosisz to samo co 10 000 innych osób.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SOLUTION ═══════ -->
+<section class="section" style="border-top: 1px solid var(--grey-dark);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Rozwiązanie</div>
+      <h2 class="section-title">Ciężki denim z&nbsp;lumpeksu.<br>Profesjonalna farba.<br>Twoja <em style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--accent);">estetyka</em>.</h2>
+    </div>
+
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="step-num"></div>
+        <div>
+          <h3>Selekcja materiału</h3>
+          <p>Wybieram wyłącznie grube, sztywne dżinsy ze 100% bawełny — Levi's, Wrangler, Carhartt. Żadnego elastanu, żadnego poliestru. Ciężki denim, kt&oacute;ry trzyma formę latami.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num"></div>
+        <div>
+          <h3>Ręczne malowanie</h3>
+          <p>Każdy wzór projektuję i maluję ręcznie — akrylem zmieszanym z&nbsp;textile medium. Farba wnika w strukturę materiału, pozostaje elastyczna i nie pęka. Motywy: Y2K, grunge, anime, gotyk, co Ci się marzy.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num"></div>
+        <div>
+          <h3>Utrwalanie termiczne</h3>
+          <p>Gotowy projekt wprasowuję w materiał pod wysoką temperaturą. Efekt? Kolor przetrwa pranie w pralce (30°C, lewa strona). Testowałem to. Wielokrotnie.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num"></div>
+        <div>
+          <h3>Dokładne wymiary</h3>
+          <p>Koniec ze zgadywaniem, czym jest "M". W każdym ogłoszeniu podaję wymiary centymetrem krawieckim: pas, biodra, długość, szerokość nogawki. Zerowe niespodzianki.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ GUARANTEE ═══════ -->
+<div class="container">
+  <div class="guarantee-strip reveal">
+    <h3>✓ Bezpieczeństwo transakcji</h3>
+    <p>Sprzedaję wyłącznie przez <strong style="color:var(--white);">Vinted</strong> — Twoje pieniądze są chronione przez platformę. Płacisz dopiero, gdy paczka do Ciebie dotrze i ją zaakceptujesz. Wysyłka paczkomatem w ciągu 24h od zakupu.</p>
+  </div>
+</div>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Pytania</div>
+      <h2 class="section-title">Zanim klikniesz</h2>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q">Farba nie zejdzie po praniu?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Nie. Używam farb akrylowych do tkanin zmieszanych z textile medium i utrwalam termicznie. Prałem testowe pary wielokrotnie — kolor trzyma. Zalecam pranie na lewej stronie w 30°C.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Skąd wiem, że rozmiar będzie pasował?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>W każdym ogłoszeniu na Vinted podaję dokładne wymiary w centymetrach: szerokość pasa, długość po szwie, szerokość uda i nogawki. Przed zakupem zmierz swoje ulubione spodnie i por&oacute;wnaj.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Czy mogę zamówić własny wzór?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Tak — przyjmuję zlecenia indywidualne. Napisz do mnie na TikToku lub Instagramie. Ustalamy motyw, Ty wysyłasz swoje spodnie paczkomatem, ja maluję. Płatność bezpiecznie przez Vinted.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Dlaczego to kosztuje więcej niż w sieciówce?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Bo to nie jest produkt masowy. Każda para to kilka godzin ręcznej pracy na ciężkim, prawdziwym deniemie — nie na cienkim poliesterze z fabryki. Dostajesz coś, czego nie ma nikt inny na świecie.</p></div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Jak wygląda wysyłka?<span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Paczkomatem InPost lub Orlen Paczka — koszty pokrywa kupujący przez Vinted (kilka złotych). Nadaję tego samego dnia lub następnego. Spodnie pakuję na lewą stronę, z pergaminem między warstwami farby.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FINAL CTA ═══════ -->
+<section class="final-cta" id="vinted">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Gotowe?</div>
+      <h2 class="section-title">Następny drop może<br>być <em style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--accent);">ostatnim</em></h2>
+      <p>Każda para istnieje w jednym egzemplarzu.<br>Jak zniknie z Vinted — zniknie na zawsze.</p>
+      <a href="https://www.vinted.pl/" class="cta-main" target="_blank" rel="noopener">
+        Przejdź na mój Vinted <span class="cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="container">
+    <p style="margin-bottom: 8px;">1 OF 1 — Ręcznie malowane dżinsy</p>
+    <p><a href="https://www.tiktok.com/" target="_blank">TikTok</a> · <a href="https://www.vinted.pl/" target="_blank">Vinted</a></p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    document.querySelectorAll('.faq-item').forEach(other => {
+      if (other !== item) other.classList.remove('open');
+    });
+    item.classList.toggle('open');
+  });
+});
+</script>
+
+</body>
+</html>
